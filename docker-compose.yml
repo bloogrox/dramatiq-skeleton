@@ -1,0 +1,20 @@
+version: '2'
+
+
+services:
+
+  worker:
+    build: .
+    image: org/dramatiq-skeleton
+    command: honcho start
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
